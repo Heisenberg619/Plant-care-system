@@ -35,4 +35,3 @@ uint32_t adc_read(void){
 	while(!(ADC1->SR & ADC_EOC));
 	return ADC1->DR;
 }
-

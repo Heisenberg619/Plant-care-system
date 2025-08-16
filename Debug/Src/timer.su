@@ -1,0 +1,2 @@
+C:/STM32-Workspace/chip_headers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
+../Src/timer.c:5:6:tim2_ms_interrupt_init	16	static
