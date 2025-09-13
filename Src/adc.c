@@ -32,6 +32,7 @@ void start_conversion(void){
 	ADC1->CR2 |= ADC_START;
 }
 uint32_t adc_read(void){
+	// Wait until conversion ends
 	while(!(ADC1->SR & ADC_EOC));
 	return ADC1->DR;
 }

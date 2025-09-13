@@ -1,0 +1,9 @@
+../Src/uart.c:18:5:__io_putchar	16	static
+../Src/uart.c:22:6:uart2_rxtx_init	8	static
+../Src/uart.c:51:13:uart_set_baudrate	24	static
+../Src/uart.c:55:17:compute_uart_bd	16	static
+../Src/uart.c:59:6:uart2_write	16	static
+../Src/uart.c:64:6:uart2_write_string	16	static
+../Src/uart.c:70:6:uart2_write_uint	32	static
+../Src/uart.c:76:6:uart2_write_float	56	static
+../Src/uart.c:82:6:uart2_print_csv	32	static

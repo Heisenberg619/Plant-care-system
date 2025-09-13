@@ -21,7 +21,7 @@ void i2c1_sht40_write(uint8_t saddr, uint8_t cmd){
 	 // Send command
 	 I2C1->DR = cmd;
 	 // Generate stop
-	 I2C1->CR1 |= I2C_CR1_STOP;// STOP
+	 I2C1->CR1 |= CR1_STOP;
 }
 void i2c1_sht40_read(uint8_t saddr, int n, uint8_t *data) {
     volatile int tmp;
@@ -86,55 +86,6 @@ void i2c_sht40_init(void){
 	I2C1->TRISE = MAX_RISE_TIME;
 	// Peripheral enable
 	I2C1->CR1 |= CR1_PE;
-}
-
-void I2C1read(uint8_t saddr, uint8_t maddr, int n, uint8_t *data){
-	volatile int tmp;
-	// Wait until bus not busy
-	while(I2C1->SR2 & SR2_BUSY);
-	// Generate start
-	I2C1->CR1 |= CR1_START;
-	// Wait until start bit set
-	while(!(I2C1->SR1 & SR1_START_BIT));
-
-	// Transmit slave address + Write
-	I2C1->DR = saddr << 1;
-	// Wait until address flag is set
-	while(!(I2C1->SR1 & SR1_ADDRESS));
-	// Clear address flag
-	tmp = I2C1->SR2;
-
-	// Wait until transmitter empty
-	while(!(I2C1->SR1 & SR1_TXE));
-	// Send memory address
-	I2C1->DR = maddr;
-	delay_ms(10);
-	// Generate restart
-	I2C1->CR1 |= CR1_START;
-	// Wait until start bit set
-	while(!(I2C1->SR1 & SR1_START_BIT));
-	// Transmit slave address + Read
-	I2C1->DR = (saddr << 1) | 1;
-	// Wait until address flag is set
-	while(!(I2C1->SR1 & SR1_ADDRESS));
-	// Clear address flag
-	tmp = I2C1->SR2;
-	// Enable acknowledge
-	I2C1->CR1 |= CR1_ACK;
-
-	while(n > 0U){
-		if(n == 1U){
-			// Disable acknowledge
-			I2C1->CR1 &= ~CR1_ACK;
-			// Generate stop
-			I2C1->CR1 |= CR1_STOP;
-		}
-		// Wait until RXNE bit is set
-		while(!(I2C1->SR1 & SR1_RXNE));
-		// Read
-		*data++ = I2C1->DR;
-		n--;
-	}
 }
 
 float calculate_temp(uint16_t temp){

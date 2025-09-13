@@ -1,0 +1,5 @@
+../Src/i2c_sht40.c:4:6:i2c1_sht40_write	24	static
+../Src/i2c_sht40.c:26:6:i2c1_sht40_read	32	static
+../Src/i2c_sht40.c:54:6:i2c_sht40_init	4	static
+../Src/i2c_sht40.c:91:7:calculate_temp	16	static
+../Src/i2c_sht40.c:94:7:calculate_hum	16	static

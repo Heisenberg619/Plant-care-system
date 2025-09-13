@@ -19,4 +19,3 @@ void tim2_ms_interrupt_init(uint32_t ms){
 	// Enable interrupt in NVIC
 	NVIC_EnableIRQ(TIM2_IRQn);
 }
-
